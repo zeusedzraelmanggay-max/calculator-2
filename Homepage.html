@@ -1,333 +1,341 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Calorie Calculator - Your Path to a Healthier You</title>
-    <script src="https://kit.fontawesome.com/your-font-awesome-kit-id.js" crossorigin="anonymous"></script>
-    <style>
-        body {
-            font-family: 'Segoe UI', Arial, sans-serif;
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            color: #222;
-            line-height: 1.6;
-            background: linear-gradient(120deg, #e3f0ff 0%, #f8fcff 100%);
-        }
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 20px;
-        }
-        header {
-            background: #fff;
-            padding: 20px 0;
-            border-bottom: 2px solid #e3f0ff;
-            text-align: center;
-            position: relative;
-        }
-        header .logo {
-            font-size: 2em;
-            font-weight: bold;
-            color: #4a90e2;
-            letter-spacing: 1.5px;
-        }
-        .header-btn {
-            position: absolute;
-            top: 20px;
-            right: 20px;
-            background: linear-gradient(135deg,#50e3c2 80%,#4a90e2 100%);
-            color: white;
-            padding: 10px 22px;
-            text-decoration: none;
-            border-radius: 8px;
-            font-size: 1em;
-            font-weight: 500;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.10);
-            transition: background 0.3s, transform 0.2s;
-        }
-        .header-btn:hover {
-            background: linear-gradient(135deg,#4a90e2 80%,#50e3c2 100%);
-            transform: scale(1.05);
-        }
-        .hero {
-            background: url('images/Background-calc.png') no-repeat center center/cover;
-            color: white;
-            text-align: center;
-            padding: 100px 20px;
-            position: relative;
-            z-index: 1;
-        }
-        .hero::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: rgba(74, 144, 226, 0.55);
-            z-index: -1;
-        }
-        .hero h1 {
-            font-size: 3em;
-            margin-bottom: 20px;
-            text-shadow: 2px 2px 8px rgba(80,227,194,0.18);
-        }
-        .hero p {
-            font-size: 1.2em;
-            margin-bottom: 30px;
-            max-width: 700px;
-            margin-left: auto;
-            margin-right: auto;
-            text-shadow: 1px 1px 4px rgba(80,227,194,0.10);
-        }
-        .hero .cta-button {
-            display: inline-block;
-            background: linear-gradient(135deg,#50e3c2 80%,#4a90e2 100%);
-            color: white;
-            padding: 15px 30px;
-            text-decoration: none;
-            border-radius: 8px;
-            font-size: 1.1em;
-            font-weight: 500;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.10);
-            transition: background 0.3s, transform 0.2s;
-        }
-        .hero .cta-button:hover {
-            background: linear-gradient(135deg,#4a90e2 80%,#50e3c2 100%);
-            transform: scale(1.05);
-        }
-        .section {
-            padding: 60px 20px;
-            text-align: center;
-        }
-        .section:nth-of-type(odd) {
-            background: #f7f9fc;
-        }
-        .section h2 {
-            font-size: 2.2em;
-            margin-bottom: 40px;
-            color: #357abd;
-        }
-        .features-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 30px;
-            margin-top: 40px;
-        }
-        .feature-item {
-            background: #fff;
-            padding: 30px;
-            border-radius: 10px;
-            box-shadow: 0 4px 16px rgba(0,0,0,0.08);
-            transition: transform 0.3s;
-        }
-        .feature-item:hover {
-            transform: translateY(-5px) scale(1.03);
-        }
-        .feature-item img {
-            width: 80px;
-            height: 80px;
-            margin-bottom: 20px;
-            filter: drop-shadow(2px 2px 4px rgba(80,227,194,0.13));
-        }
-        .feature-item h3 {
-            font-size: 1.3em;
-            margin-bottom: 10px;
-            color: #4a90e2;
-        }
-        .feature-item p {
-            font-size: 1em;
-            color: #555;
-        }
-        .how-it-works-steps {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            gap: 40px;
-            margin-top: 40px;
-        }
-        .step-item {
-            flex: 1 1 300px;
-            padding: 30px;
-            background: #fff;
-            border-radius: 10px;
-            box-shadow: 0 4px 16px rgba(0,0,0,0.08);
-            text-align: left;
-            position: relative;
-        }
-        .step-item .step-number {
-            font-size: 2.2em;
-            font-weight: bold;
-            color: #50e3c2;
-            position: absolute;
-            top: 15px;
-            left: 20px;
-            opacity: 0.18;
-            z-index: 0;
-        }
-        .step-item h3 {
-            font-size: 1.3em;
-            margin-top: 0;
-            margin-bottom: 15px;
-            color: #357abd;
-            padding-left: 50px;
-            position: relative;
-            z-index: 1;
-        }
-        .step-item p {
-            font-size: 1em;
-            color: #555;
-            position: relative;
-            z-index: 1;
-        }
-        footer {
-            background: linear-gradient(90deg, #4a90e2 60%, #50e3c2 100%);
-            color: white;
-            padding: 60px 20px;
-            text-align: center;
-        }
-        footer .cta-footer {
-            font-size: 2em;
-            margin-bottom: 30px;
-        }
-        footer .cta-footer .cta-button {
-            background: linear-gradient(135deg,#50e3c2 80%,#4a90e2 100%);
-            color: white;
-            padding: 15px 30px;
-            text-decoration: none;
-            border-radius: 8px;
-            font-size: 1.1em;
-            font-weight: 500;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.10);
-            transition: background 0.3s, transform 0.2s;
-        }
-        footer .cta-footer .cta-button:hover {
-            background: linear-gradient(135deg,#4a90e2 80%,#50e3c2 100%);
-            transform: scale(1.05);
-        }
-        footer .footer-links {
-            margin-top: 30px;
-        }
-        footer .footer-links ul {
-            list-style: none;
-            padding: 0;
-            margin: 0;
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            gap: 20px;
-        }
-        footer .footer-links a {
-            color: white;
-            text-decoration: none;
-            transition: color 0.3s;
-        }
-        footer .footer-links a:hover {
-            color: #28a745;
-        }
-        footer .social-icons {
-            margin-top: 30px;
-        }
-        footer .social-icons a {
-            color: white;
-            font-size: 1.5em;
-            margin: 0 10px;
-            text-decoration: none;
-            transition: color 0.3s;
-        }
-        footer .social-icons a:hover {
-            color: #4a90e2;
-        }
-        footer .copyright {
-            margin-top: 40px;
-            font-size: 0.9em;
-            color: #e3f0ff;
-        }
-        @media (max-width: 768px) {
-            .hero h1 {
-                font-size: 2em;
-            }
-            .hero p {
-                font-size: 1em;
-            }
-            .section h2 {
-                font-size: 1.5em;
-            }
-            .features-grid,
-            .how-it-works-steps {
-                grid-template-columns: 1fr;
-                flex-direction: column;
-            }
-            .step-item h3 {
-                padding-left: 0;
-            }
-            .step-item .step-number {
-                position: static;
-                margin-bottom: 10px;
-                display: block;
-                text-align: center;
-            }
-            footer .footer-links ul {
-                flex-direction: column;
-                align-items: center;
-            }
-        }
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Calorie Calculator - Your Path to a Healthier You</title>
+  <script src="https://kit.fontawesome.com/your-font-awesome-kit-id.js" crossorigin="anonymous"></script>
+  <style>
+    body {
+      font-family: 'Segoe UI', Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      color: #e0e0e0;
+      line-height: 1.6;
+      background: linear-gradient(120deg, #1e1e1e 0%, #2a2a2a 100%);
+    }
 
-        /* Chatbot styles */
-        #chatbot-float {
-            position: fixed;
-            bottom: 32px;
-            right: 32px;
-            z-index: 9999;
-            background: #4a90e2;
-            width: 60px;
-            height: 60px;
-            border-radius: 50%;
-            box-shadow: 0 4px 16px rgba(0,0,0,0.18);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            transition: box-shadow 0.2s;
-        }
+    /* HEADER */
+    header {
+      background: #111;
+      padding: 20px 0;
+      border-bottom: 2px solid #2e7d32;
+      text-align: center;
+      position: relative;
+    }
+    header .logo {
+      font-size: 2em;
+      font-weight: bold;
+      color: #81c784;
+      letter-spacing: 1.5px;
+    }
+    .header-btn {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      background: linear-gradient(135deg,#43a047 80%,#66bb6a 100%);
+      color: #fff;
+      padding: 10px 22px;
+      text-decoration: none;
+      border-radius: 8px;
+      font-size: 1em;
+      font-weight: 500;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.4);
+      transition: background 0.3s, transform 0.2s;
+    }
+    .header-btn:hover {
+      background: linear-gradient(135deg,#2e7d32 80%,#43a047 100%);
+      transform: scale(1.05);
+    }
 
-        #chatbot-popup {
-            position: fixed;
-            bottom: 100px;
-            right: 32px;
-            z-index: 10000;
-            width: 320px;
-            background: #f0f4f8;
-            border-radius: 16px;
-            box-shadow: 0 8px 32px rgba(0,0,0,0.18);
-            padding: 18px;
-            display: none;
-        }
+    /* HERO SECTION */
+    .hero {
+      background: url('images/healthy-bg.jpg') no-repeat center center/cover;
+      color: #fff;
+      text-align: center;
+      padding: 100px 20px;
+      position: relative;
+      z-index: 1;
+    }
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: rgba(0, 0, 0, 0.7);
+      z-index: -1;
+    }
+    .hero h1 {
+      font-size: 3em;
+      margin-bottom: 20px;
+      text-shadow: 2px 2px 8px rgba(0,0,0,0.7);
+    }
+    .hero p {
+      font-size: 1.2em;
+      margin-bottom: 30px;
+      max-width: 700px;
+      margin-left: auto;
+      margin-right: auto;
+      color: #e0e0e0;
+    }
+    .hero .cta-button {
+      display: inline-block;
+      background: linear-gradient(135deg,#43a047 80%,#66bb6a 100%);
+      color: white;
+      padding: 15px 30px;
+      text-decoration: none;
+      border-radius: 8px;
+      font-size: 1.1em;
+      font-weight: 500;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.4);
+      transition: background 0.3s, transform 0.2s;
+    }
+    .hero .cta-button:hover {
+      background: linear-gradient(135deg,#2e7d32 80%,#388e3c 100%);
+      transform: scale(1.05);
+    }
 
-        #chatbot-window {
-            height: 140px;
-            overflow-y: auto;
-            background: #fff;
-            border-radius: 8px;
-            border: 1px solid #e0e0e0;
-            padding: 10px;
-            margin-bottom: 10px;
-            font-size: 0.98em;
-        }
+    /* SECTIONS */
+    .section {
+      padding: 60px 20px;
+      text-align: center;
+      background: #1e1e1e;
+    }
+    .section:nth-of-type(odd) {
+      background: #242424;
+    }
+    .section h2 {
+      font-size: 2.2em;
+      margin-bottom: 40px;
+      color: #81c784;
+    }
 
-        #chatbot-input {
-            flex: 1;
-            padding: 8px;
-            border-radius: 6px;
-            border: 1px solid #4a90e2;
-        }
+    /* FEATURE ITEMS */
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 30px;
+      margin-top: 40px;
+    }
+    .feature-item {
+      background: #2e2e2e;
+      padding: 30px;
+      border-radius: 10px;
+      box-shadow: 0 4px 16px rgba(0,0,0,0.6);
+      transition: transform 0.3s;
+    }
+    .feature-item:hover {
+      transform: translateY(-5px) scale(1.03);
+    }
+    .feature-item img {
+      width: 80px;
+      height: 80px;
+      margin-bottom: 20px;
+      filter: drop-shadow(2px 2px 4px rgba(0,0,0,0.3));
+    }
+    .feature-item h3 {
+      font-size: 1.3em;
+      margin-bottom: 10px;
+      color: #81c784;
+    }
+    .feature-item p {
+      font-size: 1em;
+      color: #cfcfcf;
+    }
 
-        /* End of Chatbot styles */
-    </style>
+    /* HOW IT WORKS */
+    .how-it-works-steps {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 40px;
+      margin-top: 40px;
+    }
+    .step-item {
+      flex: 1 1 300px;
+      padding: 30px;
+      background: #2b2b2b;
+      border-radius: 10px;
+      box-shadow: 0 4px 16px rgba(0,0,0,0.6);
+      text-align: left;
+      position: relative;
+    }
+    .step-item .step-number {
+      font-size: 2.2em;
+      font-weight: bold;
+      color: #4caf50;
+      position: absolute;
+      top: 15px;
+      left: 20px;
+      opacity: 0.3;
+    }
+    .step-item h3 {
+      font-size: 1.3em;
+      margin-top: 0;
+      margin-bottom: 15px;
+      color: #a5d6a7;
+      padding-left: 50px;
+    }
+    .step-item p {
+      font-size: 1em;
+      color: #ccc;
+    }
+
+    /* FOOTER */
+    footer {
+      background: linear-gradient(90deg, #1b5e20 60%, #388e3c 100%);
+      color: #e0e0e0;
+      padding: 60px 20px;
+      text-align: center;
+    }
+    footer .cta-footer {
+      font-size: 2em;
+      margin-bottom: 30px;
+      color: #c8e6c9;
+    }
+    footer .cta-footer .cta-button {
+      background: linear-gradient(135deg,#43a047 80%,#66bb6a 100%);
+      color: white;
+      padding: 15px 30px;
+      text-decoration: none;
+      border-radius: 8px;
+      font-size: 1.1em;
+      font-weight: 500;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.4);
+      transition: background 0.3s, transform 0.2s;
+    }
+    footer .cta-footer .cta-button:hover {
+      background: linear-gradient(135deg,#2e7d32 80%,#388e3c 100%);
+      transform: scale(1.05);
+    }
+
+    footer .footer-links a {
+      color: #bdbdbd;
+      text-decoration: none;
+    }
+    footer .footer-links a:hover {
+      color: #a5d6a7;
+    }
+    footer .social-icons a {
+      color: #bdbdbd;
+      text-decoration: none;
+      margin: 0 8px;
+    }
+    footer .social-icons a:hover {
+      color: #a5d6a7;
+    }
+    footer .copyright {
+      margin-top: 40px;
+      font-size: 0.9em;
+      color: #a5d6a7;
+    }
+
+    /* CHATBOT */
+    #chatbot-float {
+      background: #43a047;
+    }
+    #chatbot-popup {
+      background: #2a2a2a;
+      color: #fff;
+    }
+    #chatbot-input {
+      border: 1px solid #66bb6a;
+      background: #1c1c1c;
+      color: #fff;
+    }
+    #chatbot-popup h3 {
+      color: #81c784;
+    }
+
+    @media (max-width: 768px) {
+      .hero h1 {
+        font-size: 2em;
+      }
+      .hero p {
+        font-size: 1em;
+      }
+      .section h2 {
+        font-size: 1.5em;
+      }
+    }
+  </style>
 </head>
 <body>
+<head>
+    
+       <!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Calorie Calculator - Your Path to a Healthier You</title>
+  <script src="https://kit.fontawesome.com/your-font-awesome-kit-id.js" crossorigin="anonymous"></script>
+  <style>
+    body {
+      font-family: 'Segoe UI', Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      color: #e0e0e0;
+      line-height: 1.6;
+      background: linear-gradient(120deg, #1e1e1e 0%, #2a2a2a 100%);
+    }
+
+    /* --- Chatbot styles (moved here correctly) --- */
+    #chatbot-float {
+      position: fixed;
+      bottom: 32px;
+      right: 32px;
+      z-index: 9999;
+      background: #4a90e2;
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      box-shadow: 0 4px 16px rgba(0,0,0,0.18);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: box-shadow 0.2s;
+    }
+
+    #chatbot-popup {
+      position: fixed;
+      bottom: 100px;
+      right: 32px;
+      z-index: 10000;
+      width: 320px;
+      background: #f0f4f8;
+      border-radius: 16px;
+      box-shadow: 0 8px 32px rgba(0,0,0,0.18);
+      padding: 18px;
+      display: none;
+    }
+
+    #chatbot-window {
+      height: 140px;
+      overflow-y: auto;
+      background: #fff;
+      border-radius: 8px;
+      border: 1px solid #e0e0e0;
+      padding: 10px;
+      margin-bottom: 10px;
+      font-size: 0.98em;
+    }
+
+    #chatbot-input {
+      flex: 1;
+      padding: 8px;
+      border-radius: 6px;
+      border: 1px solid #4a90e2;
+    }
+    /* --- End of Chatbot styles --- */
+
+    /* (keep all your other CSS below) */
+  </style>
+</head>
+<body>
+
 
     <header>
         <div class="container">
